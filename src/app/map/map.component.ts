@@ -5,10 +5,9 @@ import Map from 'ol/Map';
 import TileLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import OSM from 'ol/source/OSM';
-import { fromLonLat } from 'ol/proj';
 
-const lagesCoordinates = MAP_DEFAULT_CONFIG.center;
-const zoomLevel = MAP_DEFAULT_CONFIG.zoomLevel;
+const lagesCoordinates = MAP_DEFAULT_CONFIG.center; // Coordinates for Lages, SC, Brazil
+const zoomLevel = MAP_DEFAULT_CONFIG.zoomLevel; // Default zoom level
 
 @Component({
   selector: 'app-map',
@@ -23,26 +22,29 @@ export class MapComponent implements OnInit {
     this.initializeMap();
   }
 
-  zoomIn() {
+  adjustZoom(delta: number) {
+    if (!this.map) {
+      console.error('Map is not initialized');
+      return;
+    }
     const view = this.map.getView();
     const zoom = view.getZoom() || 0;
     view.animate({
-      zoom: zoom + 1,
+      zoom: zoom + delta,
       duration: 200,
     });
+  }
+
+  zoomIn() {
+    this.adjustZoom(1); // Increase zoom level by 1
   }
 
   zoomOut() {
-    const view = this.map.getView();
-    const zoom = view.getZoom() || 0;
-    view.animate({
-      zoom: zoom - 1,
-      duration: 200,
-    });
+    this.adjustZoom(-1); // Decrease zoom level by 1
   }
 
-  initializeMap() {
-    try {
+  initializeMap() { // Initialize the map with default settings
+    try { 
       this.map = new Map({
         target: 'map',
         controls: [], // Disable default controls
@@ -58,8 +60,8 @@ export class MapComponent implements OnInit {
           zoom: zoomLevel,
         }),
       });
-    } catch (error) {
-      console.error('Failed to initialize the map:', error);
+    } catch (error) { // Handle any errors that occur during map initialization
+      console.error('Failed to initialize the map:'); 
     }
   }
 }
