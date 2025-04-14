@@ -1,17 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
+import { MapService } from '../services/map.service';
 
 describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
+  let mapServiceSpy: jasmine.SpyObj<MapService>;
 
   beforeEach(async () => {
+    const spy = jasmine.createSpyObj('MapService', ['initializeMap', 'zoomIn', 'zoomOut']);
+
     await TestBed.configureTestingModule({
-      imports: [MapComponent],
+      declarations: [MapComponent],
+      providers: [{ provide: MapService, useValue: spy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
+    mapServiceSpy = TestBed.inject(MapService) as jasmine.SpyObj<MapService>;
     fixture.detectChanges();
   });
 
@@ -19,23 +25,13 @@ describe('MapComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call view.animate when zoomIn is called with map initialized', () => {
-    const viewSpy = jasmine.createSpyObj('View', ['getZoom', 'animate']);
-    spyOn(component.map, 'getView').and.returnValue(viewSpy);
-    viewSpy.getZoom.and.returnValue(5);
-
+  it('should call MapService.zoomIn when zoomIn is called', () => {
     component.zoomIn();
-
-    expect(viewSpy.animate).toHaveBeenCalledWith({ zoom: 6, duration: 200 });
+    expect(mapServiceSpy.zoomIn).toHaveBeenCalled();
   });
 
-  it('should call view.animate when zoomOut is called with map initialized', () => {
-    const viewSpy = jasmine.createSpyObj('View', ['getZoom', 'animate']);
-    spyOn(component.map, 'getView').and.returnValue(viewSpy);
-    viewSpy.getZoom.and.returnValue(5);
-
+  it('should call MapService.zoomOut when zoomOut is called', () => {
     component.zoomOut();
-
-    expect(viewSpy.animate).toHaveBeenCalledWith({ zoom: 4, duration: 200 });
+    expect(mapServiceSpy.zoomOut).toHaveBeenCalled();
   });
 });
