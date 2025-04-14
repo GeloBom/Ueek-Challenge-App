@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MAP_CONFIG } from './map.config';
+import { MAP_DEFAULT_CONFIG } from './map.config';
 
 import Map from 'ol/Map';
 import TileLayer from 'ol/layer/Tile';
@@ -7,8 +7,8 @@ import View from 'ol/View';
 import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
 
-const lagesCoordinates = MAP_CONFIG.center;
-const zoomLevel = MAP_CONFIG.zoomLevel;
+const lagesCoordinates = MAP_DEFAULT_CONFIG.center;
+const zoomLevel = MAP_DEFAULT_CONFIG.zoomLevel;
 
 @Component({
   selector: 'app-map',
