@@ -46,26 +46,6 @@ export class PolygonService {
     return feature;
   }
 
-  addFixedPolygon(): void {
-    // Coordenadas fixas para um polígono de teste
-    const coordinates = [
-      [-50.345, -27.85], // Extremo sudoeste
-      [-50.345, -27.78], // Extremo noroeste
-      [-50.29, -27.78], // Extremo nordeste
-      [-50.29, -27.85], // Extremo sudeste
-      [-50.345, -27.85], // Fecha o polígono
-    ];
-
-    // Cria um polígono com as coordenadas fixas
-    const polygon = new Polygon([coordinates]);
-    const feature = new Feature({ geometry: polygon });
-
-    // Atualiza o signal com o novo polígono
-    this.polygons.update((currentPolygons) => [...currentPolygons, feature]);
-
-    console.log('Fixed polygon added to signal:', feature); // Log para verificar o polígono
-  }
-
   addPolygon(center: [number, number], maxArea: number): void {
     const polygon = this.generateRandomPolygon(center, maxArea);
     console.log('Polygon added to signal:', polygon); // Log para verificar o polígono

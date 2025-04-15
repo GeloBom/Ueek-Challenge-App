@@ -34,13 +34,9 @@ export class PolygonComponent implements OnInit {
     map.addLayer(this.vectorLayer);
   }
 
-  addFixedPolygon(): void {
-    this.polygonService.addFixedPolygon(); // Chama o serviço para adicionar o polígono fixo
-  }
-
   addRandomPolygon(): void {
-    const center: [number, number] = [-50.3265, -27.8159]; // Centro de Lages
-    const maxArea = 5000000; // Área máxima em m²
+    const center: [number, number] = [-50.3265, -27.8159];
+    const maxArea = 100000000; 
     this.polygonService.addPolygon(center, maxArea);
   }
 
