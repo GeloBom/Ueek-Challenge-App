@@ -11,7 +11,6 @@ export class PolygonService {
   polygons = signal<Feature<Polygon>[]>([]); // Signal to hold the polygons
   opacity = signal<number>(0.5); // Signal to hold the opacity
 
-
   generateRandomPolygon(
     center: [number, number],
     maxArea: number
@@ -50,25 +49,29 @@ export class PolygonService {
   addRandomPolygons(center: [number, number], maxArea: number): void {
     const numberOfPolygons = Math.floor(Math.random() * 4) + 1; // 1 to 4 polygons
     const polygons: Feature<Polygon>[] = [];
-  
+
     for (let i = 0; i < numberOfPolygons; i++) {
       // creates a random offset for the center
+
       const offsetX = (Math.random() - 0.5) * 0.05; // 0.05 degrees ~ 5 km
       const offsetY = (Math.random() - 0.5) * 0.05; // 0.05 degrees ~ 5 km
-  
+
       const randomCenter: [number, number] = [
         center[0] + offsetX,
         center[1] + offsetY,
       ];
-  
+
       // generates a random polygon with the new center
       const polygon = this.generateRandomPolygon(randomCenter, maxArea);
       polygons.push(polygon);
     }
-  
+
     // Updates the signal with the new polygons
-    this.polygons.update((currentPolygons) => [...currentPolygons, ...polygons]);
-  
+    this.polygons.update((currentPolygons) => [
+      ...currentPolygons,
+      ...polygons,
+    ]);
+
     console.log(`${numberOfPolygons} polygons added to signal:`, polygons); // Log para depuração
   }
 
@@ -77,39 +80,59 @@ export class PolygonService {
   }
 
   private getRandomStyle(): Style {
-    const color = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+    const color = `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')}`;
     const currentOpacity = this.opacity();
-    
+
     return new Style({
-      fill: new Fill({ 
-        color: `${color}${Math.round(currentOpacity * 255).toString(16).padStart(2, '0')}`
+      fill: new Fill({
+        color: `${color}${Math.round(currentOpacity * 255)
+          .toString(16)
+          .padStart(2, '0')}`,
       }),
-      stroke: new Stroke({ color: '#000', width: 1 })
+      stroke: new Stroke({ color: '#000', width: 1 }),
     });
+  }
+
+  recolorAllPolygons(): void {
+    const currentPolygons = this.polygons();
+    const updatedPolygons = currentPolygons.map(polygon => {
+      polygon.setStyle(this.getRandomStyle());
+      return polygon;
+    });
+    this.polygons.set(updatedPolygons);
   }
 
   updatePolygonsOpacity(newOpacity: number): void {
     this.opacity.set(newOpacity);
     const currentFeatures = this.polygons();
-    
-    currentFeatures.forEach(feature => {
+
+    currentFeatures.forEach((feature) => {
       const currentStyle = feature.getStyle() as Style;
       const fillColor = this.extractAndUpdateOpacity(
         (currentStyle.getFill() as Fill).getColor() as string,
         newOpacity
       );
-      
-      feature.setStyle(new Style({
-        fill: new Fill({ color: fillColor }),
-        stroke: currentStyle.getStroke() || undefined
-      }));
+
+      feature.setStyle(
+        new Style({
+          fill: new Fill({ color: fillColor }),
+          stroke: currentStyle.getStroke() || undefined,
+        })
+      );
     });
   }
 
   private extractAndUpdateOpacity(color: string, opacity: number): string {
     // converts the color to a hex format with the new opacity
     if (color.startsWith('#')) {
-      return color.substring(0, 7) + Math.round(opacity * 255).toString(16).padStart(2, '0');
+      return (
+        color.substring(0, 7) +
+        Math.round(opacity * 255)
+          .toString(16)
+          .padStart(2, '0')
+      );
     } else if (color.startsWith('rgba')) {
       return color.replace(/[\d\.]+\)$/, opacity + ')');
     }

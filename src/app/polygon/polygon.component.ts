@@ -40,7 +40,7 @@ export class PolygonComponent implements OnInit {
 
   addRandomPolygons(): void {
     const center: [number, number] = [-50.3265, -27.8159];
-    const maxArea = 100000000; 
+    const maxArea = 100000000;
     this.polygonService.addRandomPolygons(center, maxArea);
   }
 
@@ -50,5 +50,9 @@ export class PolygonComponent implements OnInit {
 
   onOpacityChange(value: number): void {
     this.polygonService.updatePolygonsOpacity(value);
-}
+  }
+
+  recolorPolygons(): void {
+    this.polygonService.recolorAllPolygons();
+  }
 }
