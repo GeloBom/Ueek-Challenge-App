@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MapService } from '../services/map.service';
-import { PolygonComponent } from "../polygon/polygon.component.spec";
+import { MapService } from '../services/map/map.service';
+import { PolygonComponent } from "../polygon/polygon.component";
 
 @Component({
   selector: 'app-map',

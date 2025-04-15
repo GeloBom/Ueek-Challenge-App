@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
-import { MapService } from '../services/map.service';
+import { MapService } from '../services/map/map.service';
 
 describe('MapComponent', () => {
   let component: MapComponent;

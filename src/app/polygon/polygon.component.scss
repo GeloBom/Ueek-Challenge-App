@@ -1,0 +1,25 @@
+.polygon-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+  }
+  
+  .polygon-controls button {
+    background: linear-gradient(145deg, #2c2c2c, #191919);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+  }
+  
+  .polygon-controls button:hover {
+    transform: scale(1.1);
+  }
