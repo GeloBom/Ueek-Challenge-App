@@ -1,4 +1,22 @@
 <div class="polygon-controls">
-    <button (click)="addRandomPolygon()" aria-label="Add Polygon">Add Polygon</button>
-    <button (click)="clearPolygons()" aria-label="Clear Polygons">Clear Polygons</button>
+  <button (click)="addRandomPolygons()" aria-label="Add Polygon">
+    Add Random Polygons
+  </button>
+  <button (click)="clearPolygons()" aria-label="Clear Polygons">
+    Clear Polygons
+  </button>
+
+  <div class="opacity-control">
+    <label>Opacity</label>
+    <input
+      id="opacity-slider"
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      [(ngModel)]="opacityControl"
+      (input)="onOpacityChange(opacityControl / 100)"
+    />
+    <span>{{ opacityControl }}%</span>
   </div>
+</div>

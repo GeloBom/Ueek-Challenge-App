@@ -1,25 +1,84 @@
 .polygon-controls {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 10;
-  }
-  
-  .polygon-controls button {
-    background: linear-gradient(145deg, #2c2c2c, #191919);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
-  }
-  
-  .polygon-controls button:hover {
-    transform: scale(1.1);
-  }
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+/* Estilo dos botões (mantido igual) */
+.polygon-controls button {
+  background: linear-gradient(145deg, #2c2c2c, #191919);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  text-align: center; /* Centraliza o texto */
+}
+
+.polygon-controls button:hover {
+  transform: scale(1.1);
+}
+
+/* Novo estilo para o controle de opacidade - mais integrado */
+.opacity-control {
+  background: linear-gradient(145deg, #2c2c2c, #191919);
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+  gap: 8px;
+}
+
+.opacity-control label {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+#opacity-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #444;
+  outline: none;
+  margin: 0;
+  cursor: grab;
+}
+
+#opacity-slider:active {
+  cursor: grabbing;
+}
+
+#opacity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#opacity-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #f0f0f0;
+}
+
+.opacity-control span {
+  font-size: 14px;
+  color: white;
+}
