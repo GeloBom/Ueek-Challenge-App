@@ -8,7 +8,6 @@
   z-index: 10;
 }
 
-/* Estilo dos botões (mantido igual) */
 .polygon-controls button {
   background: linear-gradient(145deg, #2c2c2c, #191919);
   color: white;
@@ -18,15 +17,28 @@
   cursor: pointer;
   font-size: 14px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
-  text-align: center; /* Centraliza o texto */
+  transition: all 0.2s ease;
+  text-align: center;
 }
 
 .polygon-controls button:hover {
   transform: scale(1.1);
 }
 
-/* Novo estilo para o controle de opacidade - mais integrado */
+.polygon-controls button:nth-child(4) {
+  background: linear-gradient(145deg, #2c2c2c, #191919);
+  &:hover {
+    background: linear-gradient(145deg, #3c3c3c, #292929);
+  }
+}
+
+.polygon-controls button.active {
+  background: linear-gradient(145deg, #ff4d4d, #cc0000) !important;
+  &:hover {
+    background: linear-gradient(145deg, #ff6666, #dd0000) !important;
+  }
+}
+
 .opacity-control {
   background: linear-gradient(145deg, #2c2c2c, #191919);
   color: white;
@@ -35,7 +47,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
+  align-items: center;
   gap: 8px;
 }
 

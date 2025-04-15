@@ -6,6 +6,12 @@
   <button (click)="clearPolygons()" aria-label="Clear Polygons">
     Clear Polygons
   </button>
+  <button 
+  (click)="enableRemovalMode()" 
+  [class.active]="isRemovalMode"
+  aria-label="Remove Polygons">
+  {{ isRemovalMode ? 'Removing...' : 'Remove Polygons' }}
+</button>
 
 
   <div class="opacity-control">

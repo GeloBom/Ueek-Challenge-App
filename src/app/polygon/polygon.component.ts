@@ -5,6 +5,9 @@ import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Feature, MapBrowserEvent } from 'ol';
+import { Polygon } from 'ol/geom';
+import Map from 'ol/Map';
 
 @Component({
   selector: 'app-polygon',
@@ -16,26 +19,49 @@ import { CommonModule } from '@angular/common';
 export class PolygonComponent implements OnInit {
   private vectorSource = new VectorSource();
   private vectorLayer = new VectorLayer({ source: this.vectorSource });
-  opacityControl = 100; // Opacity control value (0-100)
+  private map!: Map; // Adicionando a referência ao mapa
+  opacityControl = 100;
+  isRemovalMode = false;
 
   constructor(
     private polygonService: PolygonService,
     private mapService: MapService
   ) {
     effect(() => {
-      console.log('Polygons in signal:', this.polygonService.polygons());
       this.vectorSource.clear();
       this.vectorSource.addFeatures(this.polygonService.polygons());
-      console.log(
-        'Features in vector source:',
-        this.vectorSource.getFeatures()
-      );
     });
   }
 
   ngOnInit(): void {
-    const map = this.mapService.getMap();
-    map.addLayer(this.vectorLayer);
+    this.map = this.mapService.getMap();
+    this.map.addLayer(this.vectorLayer);
+  }
+
+  enableRemovalMode(): void {
+    this.isRemovalMode = !this.isRemovalMode;
+
+    if (this.isRemovalMode) {
+      this.map.on('click', this.onMapClick.bind(this));
+    } else {
+      this.map.un('click', this.onMapClick.bind(this));
+    }
+  }
+
+  private onMapClick(event: MapBrowserEvent<any>): void {
+    if (!this.isRemovalMode) return;
+
+    const clickedFeature = this.map.forEachFeatureAtPixel(
+      event.pixel,
+      (feature) => feature,
+      {
+        layerFilter: (layer) => layer === this.vectorLayer,
+      }
+    );
+
+    if (clickedFeature) {
+      this.polygonService.removePolygon(clickedFeature as Feature<Polygon>);
+    }
   }
 
   addRandomPolygons(): void {

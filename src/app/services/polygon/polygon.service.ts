@@ -75,6 +75,12 @@ export class PolygonService {
     console.log(`${numberOfPolygons} polygons added to signal:`, polygons); // Log para depuração
   }
 
+  removePolygon(polygonToRemove: Feature<Polygon>): void {
+    this.polygons.update(currentPolygons => 
+      currentPolygons.filter(polygon => polygon !== polygonToRemove)
+    );
+  }
+
   clearPolygons(): void {
     this.polygons.set([]); // Clear the polygons signal
   }
