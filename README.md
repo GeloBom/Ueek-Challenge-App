@@ -1,59 +1,119 @@
-# UeekChallengeApp
+# Ueek Challenge App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+Este projeto foi desenvolvido utilizando [Angular CLI](https://github.com/angular/angular-cli) versão 19.2.5 e integra funcionalidades de manipulação de polígonos em um mapa global utilizando a biblioteca OpenLayers.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🖥️ Tecnologias Utilizadas
 
-```bash
-ng serve
-```
+- **Angular 16+**: Framework para construção de aplicações web modernas.
+- **OpenLayers**: Biblioteca para renderização e manipulação de mapas interativos.
+- **Karma**: Ferramenta de testes para garantir a qualidade do código.
+- **HTML e SCSS**: Para estruturação e estilização da interface.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🎯 Funcionalidades
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Renderização de Mapa Global**:
+   - O mapa é renderizado utilizando a biblioteca OpenLayers.
 
-```bash
-ng generate component component-name
-```
+2. **Inserção de Polígonos Aleatórios**:
+   - Botão para adicionar de 1 a 4 polígonos aleatórios dentro da área de Lages - SC.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+3. **Inserção de Polígonos Individuais com Zoom Automático**:
+   - Botão para adicionar um único polígono e ajustar o zoom automaticamente para centralizá-lo.
 
-```bash
-ng generate --help
-```
+4. **Zoom In e Zoom Out**:
+   - Botões para ajustar o nível de zoom do mapa.
 
-## Building
+5. **Remoção de Polígonos**:
+   - Botão para remover todos os polígonos do mapa.
+   - Modo de remoção individual, onde é possível clicar em um polígono para removê-lo.
 
-To build the project run:
+6. **Controle de Opacidade**:
+   - Slider para ajustar a opacidade de todos os polígonos no mapa.
 
-```bash
-ng build
-```
+7. **Recoloração de Polígonos**:
+   - Botão para aplicar cores aleatórias a todos os polígonos.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 🚀 Como Rodar o Projeto
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. **Clone o Repositório**:
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd Ueek-Challenge-App
+   ```
+
+2. **Instale as Dependências**:
+   ```bash
+   npm install
+   ```
+
+3. **Inicie o Servidor de Desenvolvimento**:
+   ```bash
+   ng serve
+   ```
+
+4. **Acesse no Navegador**:
+   - O projeto estará disponível em `http://localhost:4200`.
+
+---
+
+## 🧪 Testes
+
+### **Executando Testes Unitários**
+Para executar os testes unitários com o [Karma](https://karma-runner.github.io), utilize o comando:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🛠️ Comandos Úteis do Angular CLI
+
+### **Servidor de Desenvolvimento**
+Para iniciar o servidor de desenvolvimento:
 
 ```bash
-ng e2e
+ng serve
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### **Gerar Componentes**
+Para gerar um novo componente:
 
-## Additional Resources
+```bash
+ng generate component component-name
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### **Build de Produção**
+Para compilar o projeto para produção:
+
+```bash
+ng build
+```
+
+Os artefatos do build serão armazenados no diretório `dist/`. O build de produção otimiza a aplicação para performance e velocidade.
+
+---
+
+## 📋 Estrutura do Projeto
+
+### **Pasta `components`**
+- **`map`**: Componente responsável pela renderização do mapa e controle de zoom.
+- **`polygon`**: Componente para manipulação de polígonos (inserção, remoção, recoloração, etc.).
+
+### **Pasta `services`**
+- **`map.service.ts`**:
+  - Gerencia a inicialização do mapa e os controles de zoom.
+- **`polygon.service.ts`**:
+  - Gerencia o estado dos polígonos, incluindo inserção, remoção, recoloração e ajuste de opacidade.
+
+---
+
+## 📄 Observações
+
+Este projeto foi desenvolvido como parte de um desafio técnico. Todas as funcionalidades foram implementadas e testadas para garantir a qualidade e a performance. Caso tenha dúvidas ou precise de mais informações, estou à disposição.
