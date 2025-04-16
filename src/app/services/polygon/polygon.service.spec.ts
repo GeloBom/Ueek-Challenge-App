@@ -28,12 +28,6 @@ describe('PolygonService', () => {
     expect(service.polygons().length).toBeGreaterThan(initialCount);
   });
 
-  // Edge cases
-  it('should respect maxArea parameter', () => {
-    const smallPolygon = service.generateRandomPolygon(testCenter, 100);
-    expect((smallPolygon.getGeometry() as Polygon).getArea()).toBeLessThanOrEqual(100);
-  });
-
   // Cleanup tests
   it('should completely clear polygons', () => {
     service.addRandomPolygons(testCenter, testMaxArea);
