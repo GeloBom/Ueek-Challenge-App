@@ -93,32 +93,12 @@ Para iniciar o servidor de desenvolvimento:
 ng serve
 ```
 
-### **Gerar Componentes**
-
-Para gerar um novo componente:
-
-```bash
-ng generate component component-name
-```
-
-### **Build de Produção**
-
-Para compilar o projeto para produção:
-
-```bash
-ng build
-```
-
-Os artefatos do build serão armazenados no diretório `dist/`. O build de produção otimiza a aplicação para performance e velocidade.
-
----
-
 ## 📋 Estrutura do Projeto
 
 ### **Pasta `components`**
 
-- **`map`**: Componente responsável pela renderização do mapa e controle de zoom.
-- **`polygon`**: Componente para manipulação de polígonos (inserção, remoção, recoloração, etc.).
+- **`map.component.ts`**: Componente responsável pela renderização do mapa e controle de zoom.
+- **`polygon.component.ts`**: Componente para manipulação de polígonos (inserção, remoção, recoloração, etc.).
 
 ### **Pasta `services`**
 
@@ -127,17 +107,25 @@ Os artefatos do build serão armazenados no diretório `dist/`. O build de produ
 - **`polygon.service.ts`**:
   - Gerencia o estado dos polígonos, incluindo inserção, remoção, recoloração e ajuste de opacidade.
 
+### **`Pasta utils`**
+
+**`polygon-serializer.ts:`**
+
+- Responsável por serializar e desserializar objetos Feature<Polygon> com seus estilos (cor de preenchimento, cor da borda e espessura).
+
+- Permite armazenar os dados essenciais dos polígonos no localStorage e reconstruí-los com fidelidade ao carregar a aplicação.
+
 ---
 
-📦 Persistência de Dados
-O estado dos polígonos é automaticamente salvo no localStorage utilizando serialização customizada para suportar estilos complexos do OpenLayers.
+## 📦 Persistência de Dados
+> O estado dos polígonos é automaticamente salvo no localStorage utilizando serialização customizada para suportar estilos complexos do OpenLayers.
 
 Os dados são restaurados na inicialização, garantindo persistência entre sessões e maior resiliência em caso de recarregamento da página.
 
 ---
 
-🌐 Deploy
-O projeto foi implantado na Vercel e está disponível publicamente no seguinte link:
+## 🌐 Deploy
+> O projeto foi implantado na Vercel e está disponível publicamente no seguinte link:
 
 🔗 https://ueek-challenge-app.vercel.app/
 
