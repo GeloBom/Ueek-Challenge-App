@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MapService } from '../services/map/map.service';
+import { MapService } from '../../services/map/map.service';
 import { PolygonComponent } from "../polygon/polygon.component";
 
 @Component({
