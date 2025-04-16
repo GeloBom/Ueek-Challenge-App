@@ -52,10 +52,8 @@ export class PolygonService {
     coordinates.push(coordinates[0]); // close the polygon
 
     const polygon = new Polygon([coordinates]);
-    console.log('Generated polygon:', polygon); // log to debug the generated polygon
 
     if (polygon.getArea() > maxArea) {
-      console.warn('Polygon area too large, regenerating...');
       return this.generateRandomPolygon(center, maxArea); // regenerate if area is too large
     }
 
@@ -87,8 +85,6 @@ export class PolygonService {
       ...currentPolygons,
       ...polygons,
     ]);
-
-    console.log(`${numberOfPolygons} polygons added to signal:`, polygons); // Log to debug the added polygons
   }
 
   removePolygon(polygonToRemove: Feature<Polygon>): void {

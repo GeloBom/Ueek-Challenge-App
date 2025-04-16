@@ -31,15 +31,14 @@ export class MapService {
           zoom: MAP_DEFAULT_CONFIG.zoomLevel,
         }),
       });
-
+  
       const view = this.map.getView();
       this.zoomLevel.set(view.getZoom() || MAP_DEFAULT_CONFIG.zoomLevel);
-
+  
       return this.map;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error('Failed to initialize the map:', errorMessage);
-      throw error;
+      throw new Error(`Failed to initialize the map: ${errorMessage}`);
     }
   }
 
