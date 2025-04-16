@@ -19,7 +19,7 @@ import Map from 'ol/Map';
 export class PolygonComponent implements OnInit {
   private vectorSource = new VectorSource();
   private vectorLayer = new VectorLayer({ source: this.vectorSource });
-  private map!: Map; // Adicionando a referência ao mapa
+  private map!: Map; 
   opacityControl = 100;
   isRemovalMode = false;
 
@@ -40,25 +40,25 @@ export class PolygonComponent implements OnInit {
 
   enableRemovalMode(): void {
     this.isRemovalMode = !this.isRemovalMode;
-
+    
     if (this.isRemovalMode) {
       this.map.on('click', this.onMapClick.bind(this));
     } else {
       this.map.un('click', this.onMapClick.bind(this));
     }
   }
-
+  
   private onMapClick(event: MapBrowserEvent<any>): void {
     if (!this.isRemovalMode) return;
-
+    
     const clickedFeature = this.map.forEachFeatureAtPixel(
       event.pixel,
-      (feature) => feature,
+      feature => feature,
       {
-        layerFilter: (layer) => layer === this.vectorLayer,
+        layerFilter: layer => layer === this.vectorLayer
       }
     );
-
+    
     if (clickedFeature) {
       this.polygonService.removePolygon(clickedFeature as Feature<Polygon>);
     }
@@ -80,5 +80,28 @@ export class PolygonComponent implements OnInit {
 
   recolorPolygons(): void {
     this.polygonService.recolorAllPolygons();
+  }
+
+  addSinglePolygonWithZoom(): void {
+    const center: [number, number] = [
+      -50.3265 + (Math.random() * 0.1 - 0.05),
+      -27.8159 + (Math.random() * 0.1 - 0.05)
+    ];
+    const maxArea = 100000000;
+    
+    const polygon = this.polygonService.addSinglePolygonWithZoom(center, maxArea);
+    this.zoomToPolygon(polygon);
+  }
+  
+  private zoomToPolygon(polygon: Feature<Polygon>): void {
+    const map = this.mapService.getMap();
+    const view = map.getView();
+    const geometry = polygon.getGeometry() as Polygon;
+    
+    view.fit(geometry.getExtent(), {
+      padding: [50, 50, 50, 50],
+      duration: 500, 
+      maxZoom: 15 
+    });
   }
 }

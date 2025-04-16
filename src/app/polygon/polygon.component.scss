@@ -115,4 +115,11 @@
   &:focus {
     outline: none;
   }
+
+  .polygon-controls button:nth-child(5) { 
+    background: linear-gradient(145deg, #2c7be5, #1c4e9e);
+    &:hover {
+      background: linear-gradient(145deg, #1c4e9e, #2c7be5);
+    }
+  }
 }

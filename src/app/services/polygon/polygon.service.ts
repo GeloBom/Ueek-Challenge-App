@@ -50,8 +50,8 @@ export class PolygonService {
     const numberOfPolygons = Math.floor(Math.random() * 4) + 1; // 1 to 4 polygons
     const polygons: Feature<Polygon>[] = [];
 
+    // creates a random offset for the center
     for (let i = 0; i < numberOfPolygons; i++) {
-      // creates a random offset for the center
 
       const offsetX = (Math.random() - 0.5) * 0.05; // 0.05 degrees ~ 5 km
       const offsetY = (Math.random() - 0.5) * 0.05; // 0.05 degrees ~ 5 km
@@ -61,8 +61,7 @@ export class PolygonService {
         center[1] + offsetY,
       ];
 
-      // generates a random polygon with the new center
-      const polygon = this.generateRandomPolygon(randomCenter, maxArea);
+      const polygon = this.generateRandomPolygon(randomCenter, maxArea); // generates a random polygon with the new center
       polygons.push(polygon);
     }
 
@@ -72,12 +71,12 @@ export class PolygonService {
       ...polygons,
     ]);
 
-    console.log(`${numberOfPolygons} polygons added to signal:`, polygons); // Log para depuração
+    console.log(`${numberOfPolygons} polygons added to signal:`, polygons); // Log to debug the added polygons
   }
 
   removePolygon(polygonToRemove: Feature<Polygon>): void {
-    this.polygons.update(currentPolygons => 
-      currentPolygons.filter(polygon => polygon !== polygonToRemove)
+    this.polygons.update((currentPolygons) =>
+      currentPolygons.filter((polygon) => polygon !== polygonToRemove)
     );
   }
 
@@ -103,7 +102,7 @@ export class PolygonService {
 
   recolorAllPolygons(): void {
     const currentPolygons = this.polygons();
-    const updatedPolygons = currentPolygons.map(polygon => {
+    const updatedPolygons = currentPolygons.map((polygon) => {
       polygon.setStyle(this.getRandomStyle());
       return polygon;
     });
@@ -143,5 +142,14 @@ export class PolygonService {
       return color.replace(/[\d\.]+\)$/, opacity + ')');
     }
     return color;
+  }
+
+  addSinglePolygonWithZoom(
+    center: [number, number],
+    maxArea: number
+  ): Feature<Polygon> {
+    const polygon = this.generateRandomPolygon(center, maxArea);
+    this.polygons.update((current) => [...current, polygon]);
+    return polygon;
   }
 }

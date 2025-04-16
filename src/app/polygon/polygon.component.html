@@ -1,18 +1,23 @@
 <div class="polygon-controls">
+  <button (click)="addSinglePolygonWithZoom()">Add Polygon & Zoom</button>
+
   <button (click)="addRandomPolygons()" aria-label="Add Polygon">
     Add Random Polygons
   </button>
-  <button (click)="recolorPolygons()">Change Colors</button>
+
+  <button (click)="recolorPolygons()">Change Polygon Colors</button>
+
+  <button
+    (click)="enableRemovalMode()"
+    [class.active]="isRemovalMode"
+    aria-label="Remove Polygons"
+  >
+    {{ isRemovalMode ? "Removing..." : "Remove Polygons" }}
+  </button>
+
   <button (click)="clearPolygons()" aria-label="Clear Polygons">
     Clear Polygons
   </button>
-  <button 
-  (click)="enableRemovalMode()" 
-  [class.active]="isRemovalMode"
-  aria-label="Remove Polygons">
-  {{ isRemovalMode ? 'Removing...' : 'Remove Polygons' }}
-</button>
-
 
   <div class="opacity-control">
     <label>Opacity</label>
