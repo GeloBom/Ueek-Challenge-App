@@ -1,6 +1,6 @@
 import { Component, OnInit, effect, inject } from '@angular/core';
-import { PolygonService } from '../services/polygon/polygon.service';
-import { MapService } from '../services/map/map.service';
+import { PolygonService } from '../../services/polygon/polygon.service';
+import { MapService } from '../../services/map/map.service';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +20,7 @@ export class PolygonComponent implements OnInit {
   private vectorSource = new VectorSource();
   private vectorLayer = new VectorLayer({ source: this.vectorSource });
   private map!: Map; 
-  opacityControl = 100;
+  opacityControl = 50;
   isRemovalMode = false;
 
   constructor(
