@@ -1,0 +1,125 @@
+.polygon-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.polygon-controls button {
+  background: linear-gradient(145deg, #2c2c2c, #191919);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.polygon-controls button:hover {
+  transform: scale(1.1);
+}
+
+.polygon-controls button:nth-child(4) {
+  background: linear-gradient(145deg, #2c2c2c, #191919);
+  &:hover {
+    background: linear-gradient(145deg, #3c3c3c, #292929);
+  }
+}
+
+.polygon-controls button.active {
+  background: linear-gradient(145deg, #ff4d4d, #cc0000) !important;
+  &:hover {
+    background: linear-gradient(145deg, #ff6666, #dd0000) !important;
+  }
+}
+
+.opacity-control {
+  background: linear-gradient(145deg, #2c2c2c, #191919);
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.opacity-control label {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+#opacity-slider {
+  width: 100%;
+  height: 6px;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+
+  &::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #444;
+  }
+
+  &::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #444;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    margin-top: -5px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover {
+    &::-webkit-slider-thumb {
+      transform: scale(1.2);
+      background: #f0f0f0;
+    }
+    &::-moz-range-thumb {
+      transform: scale(1.2);
+      background: #f0f0f0;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .polygon-controls button:nth-child(5) { 
+    background: linear-gradient(145deg, #2c7be5, #1c4e9e);
+    &:hover {
+      background: linear-gradient(145deg, #1c4e9e, #2c7be5);
+    }
+  }
+}

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MapService } from '../services/map.service';
+import { MapService } from '../../services/map/map.service';
+import { PolygonComponent } from "../polygon/polygon.component";
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
+  imports: [PolygonComponent],
 })
 export class MapComponent implements OnInit {
   constructor(public mapService: MapService) {}
