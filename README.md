@@ -167,4 +167,3 @@ ng serve
 
 Este projeto foi desenvolvido como parte de um desafio técnico. Todas as funcionalidades foram implementadas e testadas para garantir a qualidade e a performance.
 
-
