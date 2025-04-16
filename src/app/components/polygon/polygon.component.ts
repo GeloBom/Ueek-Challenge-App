@@ -1,12 +1,12 @@
 import { Component, OnInit, effect, inject } from '@angular/core';
 import { PolygonService } from '../../services/polygon/polygon.service';
 import { MapService } from '../../services/map/map.service';
-import VectorSource from 'ol/source/Vector';
-import VectorLayer from 'ol/layer/Vector';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Feature, MapBrowserEvent } from 'ol';
 import { Polygon } from 'ol/geom';
+import VectorSource from 'ol/source/Vector';
+import VectorLayer from 'ol/layer/Vector';
 import Map from 'ol/Map';
 
 @Component({

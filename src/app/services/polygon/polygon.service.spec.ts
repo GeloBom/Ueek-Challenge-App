@@ -1,4 +1,3 @@
-// polygon.service.spec.ts
 import { TestBed } from '@angular/core/testing';
 import { PolygonService } from './polygon.service';
 import Polygon from 'ol/geom/Polygon';

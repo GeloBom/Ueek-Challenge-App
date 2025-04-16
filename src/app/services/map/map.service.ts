@@ -1,9 +1,9 @@
 import { Injectable, signal } from '@angular/core';
+import { MAP_DEFAULT_CONFIG } from './map.config';
 import Map from 'ol/Map';
 import TileLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import OSM from 'ol/source/OSM';
-import { MAP_DEFAULT_CONFIG } from './map.config';
 
 @Injectable({
   providedIn: 'root',

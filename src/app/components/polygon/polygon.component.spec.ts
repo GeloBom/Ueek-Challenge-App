@@ -4,8 +4,6 @@ import { PolygonService } from '../../services/polygon/polygon.service';
 import { MapService } from '../../services/map/map.service';
 import Feature from 'ol/Feature';
 import Polygon from 'ol/geom/Polygon';
-import { MapBrowserEvent } from 'ol';
-import { Pixel } from 'ol/pixel';
 
 describe('PolygonComponent', () => {
   let component: PolygonComponent;
@@ -24,14 +22,14 @@ describe('PolygonComponent', () => {
       getView: () => ({
         fit: jasmine.createSpy('fit'),
       }),
-      addLayer: jasmine.createSpy('addLayer'), // Mock do método addLayer
+      addLayer: jasmine.createSpy('addLayer'), 
     });
 
     await TestBed.configureTestingModule({
-      imports: [PolygonComponent], // Adicione o PolygonComponent aqui
+      imports: [PolygonComponent],
       providers: [
         PolygonService,
-        { provide: MapService, useValue: mockMapService }, // Mock do MapService
+        { provide: MapService, useValue: mockMapService },
       ],
     }).compileComponents();
 
