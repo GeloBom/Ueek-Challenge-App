@@ -19,7 +19,7 @@ import Map from 'ol/Map';
 export class PolygonComponent implements OnInit {
   private vectorSource = new VectorSource();
   private vectorLayer = new VectorLayer({ source: this.vectorSource });
-  private map!: Map; 
+  public map!: Map; 
   opacityControl = 50;
   isRemovalMode = false;
 
@@ -93,7 +93,7 @@ export class PolygonComponent implements OnInit {
     this.zoomToPolygon(polygon);
   }
   
-  private zoomToPolygon(polygon: Feature<Polygon>): void {
+    zoomToPolygon(polygon: Feature<Polygon>): void {
     const map = this.mapService.getMap();
     const view = map.getView();
     const geometry = polygon.getGeometry() as Polygon;

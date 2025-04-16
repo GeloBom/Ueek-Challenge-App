@@ -8,13 +8,21 @@ describe('MapComponent', () => {
   let mapServiceSpy: jasmine.SpyObj<MapService>;
 
   beforeEach(async () => {
-    const spy = jasmine.createSpyObj('MapService', ['initializeMap', 'zoomIn', 'zoomOut']);
-
+    const spy = jasmine.createSpyObj('MapService', ['initializeMap', 'zoomIn', 'zoomOut', 'getMap']);
+    
+    // Mock do retorno de getMap
+    spy.getMap.and.returnValue({
+      getView: () => ({
+        fit: jasmine.createSpy('fit'),
+      }),
+      addLayer: jasmine.createSpy('addLayer'), // Mock do método addLayer
+    });
+  
     await TestBed.configureTestingModule({
-      declarations: [MapComponent],
+      imports: [MapComponent],
       providers: [{ provide: MapService, useValue: spy }],
     }).compileComponents();
-
+  
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
     mapServiceSpy = TestBed.inject(MapService) as jasmine.SpyObj<MapService>;
