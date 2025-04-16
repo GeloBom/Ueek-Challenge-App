@@ -2,9 +2,10 @@
     "version": 2,
     "builds": [
       {
-        "src": "package.json",
-        "use": "@vercel/angular",
+        "src": "src/index.html",
+        "use": "@vercel/static-build",
         "config": {
+          "distDir": "dist/ueek-challenge-app",
           "buildCommand": "ng build --configuration=production"
         }
       }
@@ -12,10 +13,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/dist/ueek-challenge-app/$1", 
-        "headers": {
-          "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400"
-        }
+        "dest": "/$1"
       }
     ]
   }
