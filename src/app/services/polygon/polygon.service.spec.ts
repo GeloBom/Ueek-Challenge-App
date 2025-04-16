@@ -1,9 +1,7 @@
 // polygon.service.spec.ts
 import { TestBed } from '@angular/core/testing';
 import { PolygonService } from './polygon.service';
-import Feature from 'ol/Feature';
 import Polygon from 'ol/geom/Polygon';
-import Fill from 'ol/style/Fill';
 
 describe('PolygonService', () => {
   let service: PolygonService;

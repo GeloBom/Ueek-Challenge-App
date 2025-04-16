@@ -1,15 +1,33 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, effect } from '@angular/core';
+import { fromLonLat } from 'ol/proj';
+import { PolygonSerializer } from '../../utils/polygon-serializer';
 import Feature from 'ol/Feature';
 import Polygon from 'ol/geom/Polygon';
 import Style from 'ol/style/Style';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
-import { fromLonLat } from 'ol/proj';
 
 @Injectable({ providedIn: 'root' })
 export class PolygonService {
   polygons = signal<Feature<Polygon>[]>([]); // Signal to hold the polygons
   opacity = signal<number>(0.5); // Signal to hold the opacity
+  polygonsLoad = signal<Feature<Polygon>[]>(this.loadFromStorage());
+
+  constructor() {
+    this.polygons.set(this.loadFromStorage());
+
+    effect(() => {
+      localStorage.setItem(
+        'polygons',
+        PolygonSerializer.serialize(this.polygons())
+      );
+    });
+  }
+
+  private loadFromStorage(): Feature<Polygon>[] {
+    const data = localStorage.getItem('polygons');
+    return data ? PolygonSerializer.deserialize(data) : [];
+  }
 
   generateRandomPolygon(
     center: [number, number],
@@ -52,7 +70,6 @@ export class PolygonService {
 
     // creates a random offset for the center
     for (let i = 0; i < numberOfPolygons; i++) {
-
       const offsetX = (Math.random() - 0.5) * 0.05; // 0.05 degrees ~ 5 km
       const offsetY = (Math.random() - 0.5) * 0.05; // 0.05 degrees ~ 5 km
 
