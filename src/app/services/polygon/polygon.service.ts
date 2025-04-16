@@ -1,15 +1,29 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, effect } from '@angular/core';
+import { fromLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
 import Polygon from 'ol/geom/Polygon';
 import Style from 'ol/style/Style';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
-import { fromLonLat } from 'ol/proj';
+import { PolygonSerializer } from '../../utils/polygon-serializer';
 
 @Injectable({ providedIn: 'root' })
 export class PolygonService {
   polygons = signal<Feature<Polygon>[]>([]); // Signal to hold the polygons
   opacity = signal<number>(0.5); // Signal to hold the opacity
+  polygonsLoad = signal<Feature<Polygon>[]>(this.loadFromStorage());
+  
+  constructor() {
+    effect(() => {
+      localStorage.setItem('polygons', PolygonSerializer.serialize(this.polygons()));
+    });
+  }
+
+  private loadFromStorage(): Feature<Polygon>[] {
+    const data = localStorage.getItem('polygons');
+    return data ? PolygonSerializer.deserialize(data) : [];
+  }
+
 
   generateRandomPolygon(
     center: [number, number],
